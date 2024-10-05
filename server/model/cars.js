@@ -1,11 +1,41 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
 const reservationSchema = new mongoose.Schema({
-  car: { type: mongoose.Schema.Types.ObjectId, ref: "Car", required: true },
+  car: {
+    _id: {
+      type: ObjectId,
+      ref: "Car",
+    },
+    brand: { type: String },
+    model: { type: String },
+    year: { type: Number },
+    registrationNumber: { type: String },
+    image_ids: [{ type: String }],
+    isAvailable: { type: Boolean },
+  },
+
   customer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
-    required: true,
+    _id: {
+      type: ObjectId,
+      ref: "user",
+    },
+    fullname: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    phone_number: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    avatar: {
+      // eslint-disable-next-line no-undef
+      data: Buffer,
+    },
   },
   rentalStartDate: { type: Date, required: true },
   rentalEndDate: { type: Date, required: true },
