@@ -9,6 +9,7 @@ const reservationController = require("../controller/reservationController");
 const auth = require("../middleware/auth");
 
 const multer = require("multer");
+const propertyController = require("../controller/propertyController");
 const upload = multer(); // Initialize multer without any configuration
 
 // user
@@ -21,6 +22,21 @@ router.get("/user/:id", userController.user);
 router.delete("/delete/:id", userController.delete);
 // router.delete('/delete/:id', auth, userController.delete)
 router.get("/user-filter", userController.loadUserByFilter);
+
+// properties
+router.post(
+  "/property-register",
+  upload.none(),
+  propertyController.createProperty
+);
+router.get("/properties", propertyController.getAllProperties);
+router.get("/property/:id", propertyController.getPropertybyID);
+router.post(
+  "/property-update/:id",
+  upload.none(),
+  propertyController.updateProperty
+);
+router.delete("/property-delete/:id", propertyController.deleteProperty);
 
 // cars
 router.post("/car-register", upload.none(), carController.createCar);
